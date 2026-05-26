@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "steel_ball_run",
+  "version": "${version}",
+  "name": "mc-mod-steelBallRun",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/steel_ball_run/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "wa.d.steel_ball_run.client.Steel_ball_runDataGenerator"
+    ],
+    "client": [
+      "wa.d.steel_ball_run.client.Steel_ball_runClient"
+    ],
+    "main": [
+      "wa.d.steel_ball_run.Steel_ball_run"
+    ]
+  },
+  "mixins": [
+    "steel_ball_run.mixins.json",
+    {
+      "config": "steel_ball_run.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "java": ">=17",
+    "geckolib": "*",
+    "fabric-api": "*",
+    "minecraft": "~1.20.1"
+  }
+}
