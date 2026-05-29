@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LIL",
+    "III",
+    "LIL"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:lime_dye"
+    }
+  },
+  "result": {
+    "item": "steel_ball_run:steel_ball",
+    "count": 1
+  }
+}

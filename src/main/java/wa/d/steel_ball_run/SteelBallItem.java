@@ -8,6 +8,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.network.packet.s2c.play.StopSoundS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class SteelBallItem extends Item {
     public SteelBallItem(Settings settings) {
@@ -37,6 +40,13 @@ public class SteelBallItem extends Item {
     // 4. ฟังก์ชันสำคัญ: ทำงานตอนที่ผู้เล่น "ปล่อยนิ้ว" จากคลิกขวา
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseDuration) {
+        // 🚀 สั่งตัดเสียงชาร์จทันทีที่ผู้เล่นปล่อยเมาส์ขวา (ฝั่ง Server ส่งแพ็กเก็ตไปสั่ง Client ให้หยุดเล่น)
+        if (!world.isClient) {
+            if (user instanceof ServerPlayerEntity player) {
+                player.networkHandler.sendPacket(new StopSoundS2CPacket(Steel_ball_run.CHARGE_ID, SoundCategory.PLAYERS));
+            }
+        }
+
         if (user instanceof PlayerEntity player) {
             int chargeDuration = this.getMaxUseTime(stack) - remainingUseDuration;
 
@@ -51,12 +61,28 @@ public class SteelBallItem extends Item {
 
                     // 3. เสกเข้าไปในโลกเกมจริง
                     world.spawnEntity(steelBall);
+
+                    // 🚀 แทรกบรรทัดเล่นเสียงตอนปาออกไปตรงนี้เลยครับวา!
+                    world.playSound(null, user.getX(), user.getY(), user.getZ(),
+                            Steel_ball_run.STEEL_BALL_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 }
 
                 // หักจำนวนไอเทมออก 1 ชิ้นหลังปา (ถ้าไม่ใช่โหมด Creative)
                 if (!player.getAbilities().creativeMode) {
                     stack.decrement(1);
                 }
+            }
+        }
+        super.onStoppedUsing(stack, world, user, remainingUseDuration);
+    }
+
+    @Override
+    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
+        if (!world.isClient) {
+            // ทุกๆ 60 ติก (3 วินาที) ให้เล่นเสียงชาร์จซ้ำเพื่อความต่อเนื่องตามความยาวเสียงของวา
+            if (remainingUseTicks % 60 == 0) {
+                world.playSound(null, user.getX(), user.getY(), user.getZ(),
+                        Steel_ball_run.STEEL_BALL_CHARGE, SoundCategory.PLAYERS, 1.0F, 1.0F);
             }
         }
     }

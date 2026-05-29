@@ -12,6 +12,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+
 public class SteelBallEntity extends ThrownItemEntity {
 
     // 1. สร้างตัวแปรควบคุมสถานะบินกลับ
@@ -118,6 +119,11 @@ public class SteelBallEntity extends ThrownItemEntity {
                                 player.dropItem(stack, false);
                             }
                         }
+
+                        //sound Effect
+                        this.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
+                                Steel_ball_run.STEEL_BALL_RETURN, net.minecraft.sound.SoundCategory.PLAYERS, 1.0F, 1.0F);
+
                     }
                     this.discard(); // ทำลายเอนทิตีบนฟ้าทิ้งเพราะกลับถึงมือเรียบร้อย
                 }

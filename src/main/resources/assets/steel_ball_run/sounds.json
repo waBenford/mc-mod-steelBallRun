@@ -1,0 +1,14 @@
+{
+  "steel_ball_charge": {
+    "category": "player",
+    "sounds": ["steel_ball_run:charge"]
+  },
+  "steel_ball_return": {
+    "category": "player",
+    "sounds": ["steel_ball_run:return"]
+  },
+  "steel_ball_throw": {
+    "category": "player",
+    "sounds": ["steel_ball_run:throw"]
+  }
+}
