@@ -49,6 +49,9 @@ public class Steel_ball_run implements ModInitializer {
 
     @Override
     public void onInitialize() {
+
+        ModBlocks.registerModBlocks();
+
         // 2. ลงทะเบียนไอเทมเข้ากับ Registry ของตัวเกม Minecraft
         Registry.register(Registries.ITEM, new Identifier("steel_ball_run", "steel_ball"), STEEL_BALL);
 
@@ -59,6 +62,7 @@ public class Steel_ball_run implements ModInitializer {
                 .displayName(Text.translatable("itemGroup.steel_ball_run.sbr_group"))
                 .entries((context, entries) -> {
                     entries.add((Steel_ball_run.STEEL_BALL));
+                    entries.add((ModBlocks.SPIN_TABLE));
                 })
                 .build()
         );

@@ -1,4 +1,5 @@
 {
   "itemGroup.steel_ball_run.sbr_group": "Steel Ball Run",
-  "item.steel_ball_run.steel_ball": "Steel Ball"
+  "item.steel_ball_run.steel_ball": "Steel Ball",
+  "block.steel_ball_run.spin_table": "Spin table"
 }
