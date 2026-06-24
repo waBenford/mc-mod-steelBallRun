@@ -52,6 +52,8 @@ public class Steel_ball_run implements ModInitializer {
 
         ModBlocks.registerModBlocks();
 
+        ModVillagers.registerVillagers();
+
         // 2. ลงทะเบียนไอเทมเข้ากับ Registry ของตัวเกม Minecraft
         Registry.register(Registries.ITEM, new Identifier("steel_ball_run", "steel_ball"), STEEL_BALL);
 

@@ -10,7 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
-    public static final String MOD_ID = "steel_ball_run"; // ปรับ MOD_ID ให้ตรงกับมอดของวานะครับ
+    public static final String MOD_ID = "steel_ball_run";
 
     // สร้างบล็อก Spin Table (ก็อปปี้คุณสมบัติความแข็งแรงมาจาก Smithing Table)
     public static final Block SPIN_TABLE = registerBlock("spin_table",
